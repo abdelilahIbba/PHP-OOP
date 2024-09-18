@@ -23,9 +23,9 @@ class User
   }
 }
 
-$user = new User("fahd", "suirita", "fahd.suirita@gmail.com");
+$user = new User("Abdelilah", "El Ibbawi", "elibbawiabdelilah@gmail.com");
 echo $user->getFirstName();
-echo $user->setLastName("fahd");
+echo $user->setLastName("Abdelilah");
 
 class BankAccount
 {
