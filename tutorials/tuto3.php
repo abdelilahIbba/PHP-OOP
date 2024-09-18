@@ -23,3 +23,4 @@ $animaux = [new Chien(), new Chat(), new Animal()];
 foreach ($animaux as $animal) {
     $animal->faireDuBruit();
 }
+ 

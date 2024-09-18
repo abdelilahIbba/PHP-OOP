@@ -25,3 +25,4 @@ $animals = [new Dog(), new Cat(), new Animal()];
 foreach ($animals as $animal) {
     $animal->makeSound();
 }
+ 
