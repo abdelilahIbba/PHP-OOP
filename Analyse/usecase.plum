@@ -1,0 +1,17 @@
+@startuml Bibliothèque
+
+class Livre {
+  - titre: string
+  - auteur: string
+  + getTitre(): string
+  + getAuteur(): string
+}
+
+class Bibliotheque {
+  + ajouterLivre(livre: Livre): void
+  + rechercherLivre(critere: string, valeur: string): array
+}
+
+Bibliotheque "1" -- "*" Livre : contient
+
+@enduml
