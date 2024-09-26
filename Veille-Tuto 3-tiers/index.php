@@ -1,14 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Ajouter un utilisateur</title>
-</head>
-<body>
-    <h1>Ajouter un nouvel utilisateur</h1>
-    <form action="ajouter_utilisateur.php" method="POST">
-        Nom: <input type="text" name="nom" required><br>
-        Email: <input type="email" name="email" required><br>
-        <button type="submit">Ajouter</button>
-    </form>
-</body>
-</html>
+<?php
+// ajouter_utilisateur.php
+require_once 'UtilisateurService.php';
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $nom = $_POST['nom'];
+    $email = $_POST['email'];
+
+    $service = new UtilisateurService();
+    $service->ajouterUtilisateur($nom, $email);
+
+    echo "Utilisateur ajouté avec succès.";
+}
+?>
