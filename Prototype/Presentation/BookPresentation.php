@@ -1,61 +1,51 @@
 <?php
-
-
-require(__DIR__ . "/../Service/BookService.php");
-require_once(__DIR__ . '/../Entities/Book.php');
-
-
-
-class BookPresentation
+include "../Service/BookService.php";
+include "../Entities/Book.php";
+$Service = new Bookservices();
+function  presentation()
 {
-    private $bookService;
-
-    public function __construct()
+    echo "+-----------------------------------------+\n";
+    echo "|            Welcome to library           |\n";
+    echo "+-----------------------------------------+\n";
+    echo "|             [V] : View books            |\n";
+    echo "|             [A] : Add book              |\n";
+    echo "|             [E] : Exit                  |\n";
+    echo "+-----------------------------------------+\n";
+}
+function DisplayData()
+{
+    global $Service;
+    foreach($Service->getbooks() as $key => $book)
     {
-        $this->bookService = new BookService(); // Initialize BookService once
+        echo ($key+1) . ") " . $book->Display() . "\n";
     }
+}
+function AddBook()
+{
+    global $Service;
+    $title = readline("Enter title book : ");
+    $isbn  = readline("Enter ISBN book : ");
+    $book = new Book($title, $isbn);
+    $Service->addbook($book);
+    echo "added book succes\n";
+}
+function start()
+{
 
-    public function viewBooks()
-    {
-        echo "\nViewing the list of Books\n";
-
-        $books = $this->bookService->getBooks();
-
-        if (empty($books)) {
-            echo "No books available.\n";
-        } else {
-            $this->displayBooks($books);
-        }
-
-        echo "---------------------------------\n\n";
-    }
-
-    private function displayBooks(array $books)
-    {
-        foreach ($books as $bk) {
-            echo "---------------------------------\n";
-            echo "ISBN: " . $bk->getISBN() . "\n";
-            echo "Title: " . $bk->getTitle() . "\n";
-        }
-    }
-
-    public function addBook()
-    {
-        echo "\nAdding a new Book\n";
-        $ISBN = $this->askForInput("Enter the ISBN of the book (or type 'back' to go back): ");
-        if (strtolower($ISBN) === "back") return;
-
-        $title = $this->askForInput("Enter the title of the book (or type 'back' to go back): ");
-        if (strtolower($title) === "back") return;
-
-        $newBook = new Book($ISBN, $title);
-        $this->bookService->setBook($newBook);
-        echo "Book added successfully\n\n";
-    }
-
-    private function askForInput($question)
-    {
-        echo $question;
-        return trim(fgets(STDIN));
+    presentation();
+    $value = readline("enter value : ");
+    $V = strtolower($value);
+    switch ($V) {
+        case "a":
+            AddBook();
+            start();
+        case "v":
+            DisplayData();
+            start();
+        case "e":
+            exit;            
+        default:
+            echo "enter correct value :"; 
+            start();           
     }
 }

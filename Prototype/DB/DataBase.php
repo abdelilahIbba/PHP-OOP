@@ -1,37 +1,43 @@
 <?php
 
-class DataBase{
+class Database
+{
+  private $Books = [];
 
-    private $filePath ;
-    public $Books = [];
-
-  public function __construct($filePath ="../DB/DataBase.txt") {
-    $this->filePath = $filePath;
-    $this->fetchData();
-   
-    
+  public function __construct()
+  {
+    $this->getData();
   }
 
-  public function fetchData(){
-
-    if (file_exists($this->filePath)){
-        $content = file_get_contents($this->filePath);
-        $data = unserialize($content);
-        $this->Books = $data->Books; 
+  private function getData()
+  {
+    $filePath = "../DB/Database.txt";
+    if (file_exists($filePath) && !empty(unserialize(file_get_contents($filePath))))
+    {
+      $this->Books = unserialize(file_get_contents($filePath))->Books;
     }
-    
-  }
-  private function pushData(){
-
-     $data= serialize($this);
-     file_put_contents($this->filePath,$data );
   }
 
-  public function store(){
-    $this-> pushData();
-
+  private function setData()
+  {
+    $filePath = "../DB/Database.txt";
+    $Data = serialize($this);
+    file_put_contents($filePath, $Data);
   }
 
+  public function saveData()
+  {
+    $this->setData();
+  }
 
+  public function getBooks()
+  {
+    return $this->Books;
+  }
+
+  public function setBooks($book)
+  {
+    array_push($this->Books, $book);
+  }
 
 }

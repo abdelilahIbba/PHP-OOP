@@ -1,45 +1,34 @@
 <?php
+class Book {
 
-class Book
-{
-  private $id;
-  private $ISBN;
-  private $title;
+    // private $id;
+    private $title;
+    private $ISBN;
 
-  public function __construct($ISBN, $title)
-  {
-    $this->id = time();
-    $this->ISBN = $ISBN;
-    $this->title = $title;
-  }
+    public function __construct($title, $ISBN) {
 
-  public function getId()
-  {
-    return $this->id;
-  }
+        $this->title = $title;
+        $this->ISBN = $ISBN;
+    }
 
-  public function setId($id)
-  {
-    $this->id = $id;
-  }
-
-  public function getISBN()
-  {
-    return $this->ISBN;
-  }
-
-  public function setISBN($ISBN)
-  {
-    $this->ISBN = $ISBN;
-  }
-
-  public function getTitle()
-  {
-    return $this->title;
-  }
-
-  public function setTitle($title)
-  {
-    $this->title = $title;
-  }
+// Getters
+    // public function getId() {
+    //     return $this->id;
+    // }
+    public function getTitle() {
+        return $this->title;
+    }
+    public function getISBN() {
+        return $this->ISBN;
+    }
+// Setters
+    public function setTitle($title) {
+        $this->title = $title;
+    }
+    public function setISBN($ISBN) {
+        $this->ISBN = $ISBN;
+    }
+    public function Display() {
+    return "Title : " . $this->getTitle() ." ISBN : ". $this->getISBN() . "\n";
+    }
 }

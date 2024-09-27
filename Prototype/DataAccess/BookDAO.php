@@ -1,23 +1,18 @@
 <?php
-require("../DB/DataBase.php");
+require "../DB/DataBase.php";
 
-class BookDAO 
+class BookDAO
 {
-    private $dataBase;
-
-    public function __construct() {
-        $this->dataBase = new DataBase();
+    public function getBooks()
+    {
+        $Books = new Database();
+        return $Books->getBooks();
     }
 
-    public function getAll(){
-        return $this->dataBase->Books;
+    public function AddBooks($book)
+    {
+        $Books = new Database();
+        $Books->setBooks($book);
+        $Books->saveData();
     }
-    public function push($book){
-        $this->dataBase->Books[] = $book;
-        $this->dataBase->store();
-
-    }
-    
-
-    
 }

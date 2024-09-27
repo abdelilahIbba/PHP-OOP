@@ -1,17 +1,14 @@
-<?php
-require("../DataAccess/BookDAO.php");
-
-class BookService
-{
-  public function getBooks()
+<?php 
+include "../DataAccess/BookDAO.php";
+class Bookservices {
+  public function getbooks()
   {
-    $dataBase = new BookDAO();
-    return $dataBase->getAll();
+      $books = new BookDAO();
+      return $books->getBooks();
   }
-
-  public function setBook($book)
+    public function addbook($book)
   {
-    $bookDAO = new BookDAO();
-    $bookDAO->push($book);
+    $bookDao = new BookDAO();
+    $bookDao->AddBook($book);
   }
 }
